@@ -58,6 +58,26 @@ async function main() {
     },
   });
   console.log(secondUserPosts);
+
+  const firstUpdatedUser = await prisma.user.update({
+    where: {
+      id: 1,
+    },
+    data: {
+      name: 'First Updated User',
+    },
+  });
+  console.log(firstUpdatedUser);
+
+  const secondUpdatedUser = await prisma.user.update({
+    where: {
+      id: 2,
+    },
+    data: {
+      name: 'Second Updated User',
+    },
+  });
+  console.log(secondUpdatedUser);
 }
 
 main()
