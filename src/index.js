@@ -34,6 +34,30 @@ async function main() {
       posts: true,
     },
   });
+
+  const users = await prisma.user.findMany();
+  console.log(users);
+
+  const posts = await prisma.post.findMany();
+  console.log(posts);
+
+  const firstUserPosts = await prisma.post.findMany({
+    where: {
+      author: {
+        name: 'First User',
+      },
+    },
+  });
+  console.log(firstUserPosts);
+
+  const secondUserPosts = await prisma.post.findMany({
+    where: {
+      author: {
+        name: 'Second User',
+      },
+    },
+  });
+  console.log(secondUserPosts);
 }
 
 main()
