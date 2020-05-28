@@ -78,6 +78,15 @@ async function main() {
     },
   });
   console.log(secondUpdatedUser);
+
+  await prisma.post.deleteMany();
+  await prisma.user.deleteMany();
+
+  const usersAfterDeletion = await prisma.user.findMany();
+  console.log(usersAfterDeletion);
+
+  const postsAfterDeletion = await prisma.post.findMany();
+  console.log(postsAfterDeletion);
 }
 
 main()
