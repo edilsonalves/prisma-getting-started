@@ -37,9 +37,33 @@ async function main() {
 
   const users = await prisma.user.findMany();
   console.log(users);
+  // [
+  //   { id: 1,
+  //     email: 'first.user@prisma.io',
+  //     name: 'First User'
+  //   },
+  //   { id: 2,
+  //     email: 'second.user@prisma.io',
+  //     name: 'Second User'
+  //   }
+  // ]
 
   const posts = await prisma.post.findMany();
   console.log(posts);
+  // [
+  //   {
+  //     id: 1,
+  //     title: 'Duis tristique',
+  //     text: 'Duis tristique placerat erat, vel semper nibh vestibulum.',
+  //     authorId: 1
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Morbi eget',
+  //     text: 'Morbi eget lacus vel nisl finibus euismod. Aenean.',
+  //     authorId: 2
+  //   }
+  // ]
 
   const firstUserPosts = await prisma.post.findMany({
     where: {
@@ -49,6 +73,14 @@ async function main() {
     },
   });
   console.log(firstUserPosts);
+  // [
+  //   {
+  //     id: 1,
+  //     title: 'Duis tristique',
+  //     text: 'Duis tristique placerat erat, vel semper nibh vestibulum.',
+  //     authorId: 1
+  //   }
+  // ]
 
   const secondUserPosts = await prisma.post.findMany({
     where: {
@@ -58,6 +90,14 @@ async function main() {
     },
   });
   console.log(secondUserPosts);
+  // [
+  //   {
+  //     id: 2,
+  //     title: 'Morbi eget',
+  //     text: 'Morbi eget lacus vel nisl finibus euismod. Aenean.',
+  //     authorId: 2
+  //   }
+  // ]
 
   const firstUpdatedUser = await prisma.user.update({
     where: {
@@ -68,6 +108,11 @@ async function main() {
     },
   });
   console.log(firstUpdatedUser);
+  // {
+  //   id: 1,
+  //   email: 'first.user@prisma.io',
+  //   name: 'First Updated User'
+  // }
 
   const secondUpdatedUser = await prisma.user.update({
     where: {
@@ -78,15 +123,22 @@ async function main() {
     },
   });
   console.log(secondUpdatedUser);
+  // {
+  //   id: 2,
+  //   email: 'second.user@prisma.io',
+  //   name: 'Second Updated User'
+  // }
 
   await prisma.post.deleteMany();
   await prisma.user.deleteMany();
 
   const usersAfterDeletion = await prisma.user.findMany();
   console.log(usersAfterDeletion);
+  // []
 
   const postsAfterDeletion = await prisma.post.findMany();
   console.log(postsAfterDeletion);
+  // []
 }
 
 main()
